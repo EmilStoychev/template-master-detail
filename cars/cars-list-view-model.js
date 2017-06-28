@@ -1,10 +1,9 @@
-var config = require("../shared/config");
-var fetchModule = require("fetch");
-var Observable = require("data/observable").Observable;
-var ObservableArray = require("data/observable-array").ObservableArray;
+const config = require("../shared/config");
+const Observable = require("data/observable").Observable;
+const ObservableArray = require("data/observable-array").ObservableArray;
 
 function CarsListViewModel() {
-    var viewModel = new Observable();
+    const viewModel = new Observable();
 
     viewModel.isLoading = false;
     viewModel.cars = new ObservableArray([]);
@@ -12,12 +11,11 @@ function CarsListViewModel() {
     viewModel.load = function () {
         this.set("isLoading", true);
 
-        fetch(config.apiUrl + "Cars")
+        fetch(`${config.apiUrl}Cars`)
             .then(handleErrors)
-            .then(function (response) {
-                return response.json();
-            }).then(function (data) {
-                data.Result.forEach(function (car) {
+            .then((response) => response.json())
+            .then((data) => {
+                data.Result.forEach((car) => {
                     viewModel.cars.push({
                         name: car.Name,
                         id: car.Id,
@@ -35,7 +33,7 @@ function CarsListViewModel() {
 
                 viewModel.set("isLoading", false);
             });
-    }
+    };
 
     viewModel.empty = function () {
         while (this.cars.length) {
@@ -51,6 +49,8 @@ function handleErrors(response) {
         console.log(JSON.stringify(response));
         throw Error(response.statusText);
     }
+
     return response;
 }
+
 module.exports = CarsListViewModel;

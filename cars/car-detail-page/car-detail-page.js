@@ -1,5 +1,5 @@
-var CarDetailViewModel = require("./car-detail-view-model");
-var frameModule = require("ui/frame");
+const CarDetailViewModel = require("./car-detail-view-model");
+const frameModule = require("ui/frame");
 
 function onNavigatingTo(args) {
     /*
@@ -7,7 +7,7 @@ function onNavigatingTo(args) {
     view the API reference of the Page to see what’s available at
     https://docs.nativescript.org/api-reference/classes/_ui_page_.page.html
     */
-    var page = args.object;
+    const page = args.object;
 
     /*
     A page’s bindingContext is an object that should be used to perform
