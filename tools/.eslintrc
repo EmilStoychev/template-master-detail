@@ -4,8 +4,7 @@
         "es6": true
     },
     "globals": {
-        "global": true,
-        "fetch": true
+        "global": true
     },
     "extends": "eslint:recommended",
     "rules": {
@@ -17,7 +16,8 @@
         "block-spacing": "error",
         "brace-style": [
             "error",
-            "stroustrup"
+            "stroustrup",
+            { "allowSingleLine": true }
         ],
         "camelcase": "error",
         "comma-dangle": "error",

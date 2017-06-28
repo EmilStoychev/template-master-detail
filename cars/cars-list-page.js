@@ -9,12 +9,13 @@ NativeScript adheres to the CommonJS specification for dealing with
 JavaScript modules. The CommonJS require() function is how you import
 JavaScript modules defined in other files.
 */
-const CarsListViewModel = require("./cars-list-view-model");
 const topmost = require("ui/frame").topmost;
 
-const carsListViewModel = new CarsListViewModel();
+const CarsListViewModel = require("./cars-list-view-model");
 
-module.exports.onNavigatingTo = function onNavigatingTo(args) {
+const viewModel = new CarsListViewModel();
+
+function onNavigatingTo(args) {
     /*
     This gets a reference this page’s <Page> UI component. You can
     view the API reference of the Page to see what’s available at
@@ -32,7 +33,7 @@ module.exports.onNavigatingTo = function onNavigatingTo(args) {
     You can learn more about data binding in NativeScript at
     https://docs.nativescript.org/core-concepts/data-binding.
     */
-    page.bindingContext = carsListViewModel;
+    page.bindingContext = viewModel;
 
     /*
     Using onNavigatingTo event will trigger fetching on remote data for every page navigation.
@@ -40,15 +41,17 @@ module.exports.onNavigatingTo = function onNavigatingTo(args) {
     on every page nacigation. 
     */
 
-    carsListViewModel.empty();
-    carsListViewModel.load();
-};
+    viewModel.load();
+}
 
-module.exports.onCarItemTap = function onCarItemTap(args) {
-    const tappedCarItem = args.view.bindingContext;
+function onCarItemTap(args) {
+    const tappedCarItem = args.object.bindingContext;
 
     topmost().navigate({
         moduleName: "cars/car-detail-page/car-detail-page",
         context: tappedCarItem
     });
-};
+}
+
+exports.onNavigatingTo = onNavigatingTo;
+exports.onCarItemTap = onCarItemTap;

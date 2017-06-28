@@ -1,5 +1,6 @@
+const topmost = require("ui/frame").topmost;
+
 const CarDetailViewModel = require("./car-detail-view-model");
-const frameModule = require("ui/frame");
 
 function onNavigatingTo(args) {
     /*
@@ -22,8 +23,17 @@ function onNavigatingTo(args) {
     page.bindingContext = new CarDetailViewModel(page.navigationContext);
 }
 
-function onGoBack() {
-    frameModule.topmost().goBack();
+function onBackButtonTap() {
+    topmost().goBack();
+}
+
+function onEditButtonTap(args) {
+    const tappedCarItem = args.object.bindingContext;
+
+    topmost().navigate({
+        moduleName: "cars/car-detail-edit-page/car-detail-edit-page",
+        context: tappedCarItem.car
+    });
 }
 
 /*
@@ -33,4 +43,5 @@ function here makes the navigatingTo="onNavigatingTo" binding in this page’s X
 file work.
 */
 exports.onNavigatingTo = onNavigatingTo;
-exports.onGoBack = onGoBack;
+exports.onBackButtonTap = onBackButtonTap;
+exports.onEditButtonTap = onEditButtonTap;

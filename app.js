@@ -6,6 +6,9 @@ purpose of the file is to pass control to the app’s first module.
 require("./bundle-config");
 const app = require("application");
 
+// Firebase initialization
+require("./shared/firebase.common");
+
 app.start({ moduleName: "cars/cars-list-page" });
 
 /*
