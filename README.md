@@ -11,7 +11,7 @@ This Master-Detail template is a fundamental building block for any app that dis
 ## Key Features
 - Editable master-detail interface
 - Integration with Firebase database
-– Works offline
+- Works offline
 - Customizable theme
 - UX and development best practices
 - Easy to understand code through extensive code comments
